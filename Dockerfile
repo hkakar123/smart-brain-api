@@ -1,9 +1,20 @@
+# Use Node.js LTS image
 FROM node:18
 
-WORKDIR /usr/src/smart-brain-api
+# Set working directory
+WORKDIR /usr/src/app
 
-COPY ./ ./
+# Copy package.json and package-lock.json first (for caching layers)
+COPY package*.json ./
 
-RUN npm install 
+# Install dependencies
+RUN npm install
 
-CMD ["/bin/bash"]
+# Copy the rest of your source code
+COPY . .
+
+# Expose backend port
+EXPOSE 3000
+
+# Start your app
+CMD ["npm", "start"]

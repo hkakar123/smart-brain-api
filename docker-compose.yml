@@ -1,13 +1,11 @@
-version: '3.9'
-
 services:
   smart-brain-api:
     container_name: backend
-    build: ./
-    command: npm start
+    build: .
     working_dir: /usr/src/app
+    command: npm start
     environment:
-      POSTGRES_URI: postgresql://postgres:9699511Hk!@db.zibaknnfiuehdirbciuh.supabase.co:5432/postgres
+      POSTGRES_URI: postgresql://postgres.zibaknnfiuehdirbciuh:9699511Hk!!@aws-1-us-east-1.pooler.supabase.com:5432/postgres
       REDIS_HOST: redis
       REDIS_PORT: 6379
     ports:
