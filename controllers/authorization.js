@@ -1,18 +1,19 @@
+// controllers/authorization.js
 import { redisClient } from "../server.js";
 
-export const requireAuth = (req, res, next) => {
+export const requireAuth = async (req, res, next) => {
   const { authorization } = req.headers;
-  if (!authorization) {
-    return res.status(401).json({ error: 'Unauthorized' }); // send JSON
-  }
+  if (!authorization) return res.status(401).json({ error: 'Unauthorized' });
 
-  redisClient.get(authorization, (err, reply) => {
-    if (err || !reply) {
-      return res.status(401).json({ error: 'Unauthorized' }); // send JSON
-    }
+  try {
+    const userId = await redisClient.get(authorization);
+    if (!userId) return res.status(401).json({ error: 'Unauthorized' });
 
-    console.log('✅ you shall pass');
-    req.userId = reply; // optional: attach userId
+    req.userId = userId;
+    console.log('✅ Authorized user:', userId);
     return next();
-  });
+  } catch (err) {
+    console.error('Redis error:', err);
+    return res.status(500).json({ error: 'Redis error' });
+  }
 };

@@ -5,16 +5,10 @@ services:
     working_dir: /usr/src/app
     command: npm start
     environment:
-      POSTGRES_URI: postgresql://postgres.zibaknnfiuehdirbciuh:9699511Hk!!@aws-1-us-east-1.pooler.supabase.com:5432/postgres
-      REDIS_HOST: redis
-      REDIS_PORT: 6379
+      POSTGRES_URI: postgresql://postgres:9699511Hk!!@aws-1-us-east-1.pooler.supabase.com:6543/smartbrain-db?pgbouncer=true
+      REDIS_URL: https://modest-oryx-26067.upstash.io
+      REDIS_TOKEN: AWXTAAIncDE0YjYzMjE1MmU1OGY0ZWE5ODkzOTk3MGMwNGEzOGMyY3AxMjYwNjc
+      JWT_SECRET: uR9&hG2#xL!p7@dT5zF8qQwR1vN0sM6j
+      PORT: 3000
     ports:
       - "3000:3000"
-    depends_on:
-      - redis
-
-  redis:
-    image: redis:latest
-    container_name: redis
-    ports:
-      - "6379:6379"
