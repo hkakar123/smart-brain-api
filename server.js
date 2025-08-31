@@ -14,9 +14,12 @@ import { requireAuth } from './controllers/authorization.js';
 // -------------------- PostgreSQL Setup --------------------
 const db = knex({
   client: 'pg',
-  connection: process.env.POSTGRES_URI
+  connection: {
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false },
+    family: 4 // This is the crucial line to force IPv4
+  }
 });
-
 // -------------------- Redis Setup (Upstash REST) --------------------
 export const redisClient = new Redis({
   url: process.env.REDIS_URL,
