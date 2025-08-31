@@ -5,7 +5,7 @@ services:
     working_dir: /usr/src/app
     command: npm start
     environment:
-      POSTGRES_URI: postgresql://postgres:9699511Hk!!@aws-1-us-east-1.pooler.supabase.com:6543/smartbrain-db?pgbouncer=true
+      POSTGRES_URI: postgresql://postgres:9699511Hk!!@aws-1-us-east-1.pooler.supabase.com:6543/smartbrain-db
       REDIS_URL: https://modest-oryx-26067.upstash.io
       REDIS_TOKEN: AWXTAAIncDE0YjYzMjE1MmU1OGY0ZWE5ODkzOTk3MGMwNGEzOGMyY3AxMjYwNjc
       JWT_SECRET: uR9&hG2#xL!p7@dT5zF8qQwR1vN0sM6j

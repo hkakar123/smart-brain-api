@@ -14,8 +14,12 @@ import { requireAuth } from './controllers/authorization.js';
 // -------------------- PostgreSQL Setup --------------------
 const db = knex({
   client: 'pg',
-  connection: process.env.POSTGRES_URI
+  connection: {
+    connectionString: process.env.POSTGRES_URI,
+    ssl: { rejectUnauthorized: false } // important for online DB
+  }
 });
+
 
 // -------------------- Redis Setup (Upstash REST) --------------------
 export const redisClient = new Redis({
@@ -169,6 +173,9 @@ app.post('/signout', async (req, res) => {
 db.raw('SELECT current_database(), current_user;')
   .then(data => console.log('Connected DB:', data.rows))
   .catch(err => console.error('DB connection error:', err));
+
+  app.get('/', (req,res) => res.send('Smart Brain API is running!'));
+
 
 // -------------------- Start Server --------------------
 const PORT = process.env.PORT || 3000;
