@@ -15,7 +15,7 @@ import { requireAuth } from './controllers/authorization.js';
 const db = knex({
   client: 'pg',
   connection: {
-    connectionString: process.env.POSTGRES_URI,
+    connectionString: process.env.DATABASE_URL,
     ssl: { rejectUnauthorized: false } // important for online DB
   }
 });
@@ -33,7 +33,7 @@ console.log('✅ Upstash Redis client created');
 const app = express();
 app.use(morgan('combined'));
 app.use(cors({
-  origin: ['https://smart-brain-api-uok1.onrender.com', 'http://localhost:3001'],
+  origin: ['http://localhost:3000', 'http://localhost:3001'],
   methods: ['GET','POST','PUT'],
   allowedHeaders: ['Content-Type','Authorization'],
 }));
