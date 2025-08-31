@@ -15,9 +15,12 @@ import { requireAuth } from './controllers/authorization.js';
 const db = knex({
   client: 'pg',
   connection: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false }
+  ssl: { rejectUnauthorized: false },
+  pool: {
+    min: 2,
+    max: 5
+  }
 });
-
 
 // -------------------- Redis Setup (Upstash REST) --------------------
 export const redisClient = new Redis({
