@@ -14,11 +14,11 @@ import { requireAuth } from './controllers/authorization.js';
 // -------------------- PostgreSQL Setup --------------------
 const db = knex({
   client: 'pg',
-  connection: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
-  pool: {
-    min: 2,
-    max: 5
+  connection: {
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
   }
 });
 
